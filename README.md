@@ -4,7 +4,7 @@
 
 ## Demo
 
-[![Video demo](path/to/thumbnail.png)](https://raw.githubusercontent.com/cuongtv89ks/tmux-gemini-orchestrator/main/Examples/gemini-orchestrator.mp4)
+[![Video demo](Examples/gemini-orchestrator.gif)
 
 ![Successfully completed](Examples/done.png)
 ![Simple demo](Examples/dashboard-app.png)
