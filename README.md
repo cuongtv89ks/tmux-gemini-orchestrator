@@ -4,7 +4,7 @@
 
 ## Demo
 
-[![Video demo](Examples/gemini-orchestrator.gif)
+![Video demo](Examples/gemini-orchestrator.gif)
 
 ![Successfully completed](Examples/done.png)
 ![Simple demo](Examples/dashboard-app.png)
