@@ -3,10 +3,9 @@
 ![Orchestrator Hero](/gemini-cli.png)
 
 ## Demo
-<video width="640" controls>
-  <source src="https://raw.githubusercontent.com/cuongtv89ks/tmux-gemini-orchestrator/main/Examples/gemini-orchestrator.mp4" type="video/mp4">
-  Your browser does not support the video tag.
-</video>
+
+[![Video demo](path/to/thumbnail.png)](https://raw.githubusercontent.com/cuongtv89ks/tmux-gemini-orchestrator/main/Examples/gemini-orchestrator.mp4)
+
 ![Successfully completed](Examples/done.png)
 ![Simple demo](Examples/dashboard-app.png)
 
