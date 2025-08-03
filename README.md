@@ -1,7 +1,7 @@
 # 🤖 Tmux Gemini Orchestrator
 
 ![Orchestrator Hero](/gemini-cli.png)
-![Video demo](Examples/gemini-orchestrator.mp4)
+![Video demo](https://github.com/cuongtv89ks/tmux-gemini-orchestrator/blob/main/Examples/gemini-orchestrator.mp4)
 ![Successfully completed](Examples/done.png)
 ![Simple demo](Examples/dashboard-app.png)
 
