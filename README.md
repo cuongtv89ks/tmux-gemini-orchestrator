@@ -1,17 +1,22 @@
+# 🤖 Tmux Gemini Orchestrator
+
 ![Orchestrator Hero](/gemini-cli.png)
+![Video demo](Examples/gemini-orchestrator.mp4)
+![Successfully completed](Examples/done.png)
+![Simple demo](Examples/dashboard-app.png)
 
 **Run AI agents 24/7 while you sleep** - The Tmux Orchestrator enables Gemini agents to work autonomously, schedule their own check-ins, and coordinate across multiple projects without human intervention.
 
-## 🤖 Key Capabilities & Autonomous Features
+## 🚀 Core Features
 
-- **Self-trigger** - Agents schedule their own check-ins and continue work autonomously
-- **Coordinate** - Project managers assign tasks to engineers across multiple codebases  
-- **Persist** - Work continues even when you close your laptop
-- **Scale** - Run multiple teams working on different projects simultaneously
+-   **Autonomous Operation**: Agents can self-trigger and schedule their own follow-up tasks to continue working even when you're offline.
+-   **Team Coordination**: A Project Manager agent can assign tasks to multiple Engineer agents, enabling parallel development on complex projects.
+-   **Persistent Sessions**: Built on `tmux`, the orchestrator ensures that work continues uninterrupted, even if you disconnect from the server.
+-   **Scalable Architecture**: Easily manage multiple agent teams working on different projects simultaneously.
 
-## 🏗️ Architecture
+## 🏗️ System Architecture
 
-The Tmux Orchestrator uses a three-tier hierarchy to overcome context window limitations:
+The orchestrator uses a hierarchical model to manage complexity and stay within context limits:
 
 ```
 ┌─────────────┐
@@ -21,256 +26,140 @@ The Tmux Orchestrator uses a three-tier hierarchy to overcome context window lim
        ▼
 ┌─────────────┐     ┌─────────────┐
 │  Project    │     │  Project    │
-│  Manager 1  │     │  Manager 2  │ ← Assign tasks, enforce specs
+│  Manager 1  │     │  Manager 2  │ ← Assigns tasks, enforces quality
 └──────┬──────┘     └──────┬──────┘
        │                   │
        ▼                   ▼
 ┌─────────────┐     ┌─────────────┐
-│ Engineer 1  │     │ Engineer 2  │ ← Write code, fix bugs
+│ Engineer 1  │     │ Engineer 2  │ ← Writes code, fixes bugs
 └─────────────┘     └─────────────┘
 ```
 
-### Why Separate Agents?
-- **Limited context windows** - Each agent stays focused on its role
-- **Specialized expertise** - PMs manage, engineers code
-- **Parallel work** - Multiple engineers can work simultaneously
-- **Better memory** - Smaller contexts mean better recall
-
-## 📸 Examples in Action
-
-### Project Manager Coordination
-![Initiate Project Manager](Examples/Initiate%20Project%20Manager.png)
-*The orchestrator creating and briefing a new project manager agent*
-
-### Status Reports & Monitoring
-![Status Reports](Examples/Status%20reports.png)
-*Real-time status updates from multiple agents working in parallel*
-
-### Tmux Communication
-![Reading TMUX Windows and Sending Messages](Examples/Reading%20TMUX%20Windows%20and%20Sending%20Messages.png)
-*How agents communicate across tmux windows and sessions*
-
-### Project Completion
-![Project Completed](Examples/Project%20Completed.png)
-*Successful project completion with all tasks verified and committed*
-
-## 🎯 Quick Start
-
-### Option 1: Basic Setup (Single Project)
-
-```bash
-# 1. Create a project spec
-cat > project_spec.md << 'EOF'
-PROJECT: My Web App
-GOAL: Add user authentication system
-CONSTRAINTS:
-- Use existing database schema
-- Follow current code patterns  
-- Commit every 30 minutes
-- Write tests for new features
-
-DELIVERABLES:
-1. Login/logout endpoints
-2. User session management
-3. Protected route middleware
-EOF
-
-# 2. Start tmux session
-tmux new-session -s my-project
-
-# 3. Start project manager in window 0
-gemini 
-
-# 4. Give PM the spec and let it create an engineer
-"You are a Project Manager. Read project_spec.md and create an engineer 
-in window 1 to implement it. Schedule check-ins every 30 minutes."
-
-# 5. Schedule orchestrator check-in
-./schedule_with_note.sh 30 "Check PM progress on auth system"
-```
-
-### Option 2: Full Orchestrator Setup
-
-```bash
-# Start the orchestrator
-tmux new-session -s orchestrator
-gemini
-
-# Give it your projects
-"You are the Orchestrator. Set up project managers for:
-1. Frontend (React app) - Add dashboard charts
-2. Backend (FastAPI) - Optimize database queries
-Schedule yourself to check in every hour."
-```
-
-## ✨ Key Features
-
-### 🔄 Self-Scheduling Agents
-Agents can schedule their own check-ins using:
-```bash
-./schedule_with_note.sh 30 "Continue dashboard implementation"
-```
-
-### 👥 Multi-Agent Coordination
-- Project managers communicate with engineers
-- Orchestrator monitors all project managers
-- Cross-project knowledge sharing
-
-### 💾 Automatic Git Backups
-- Commits every 30 minutes of work
-- Tags stable versions
-- Creates feature branches for experiments
-
-### 📊 Real-Time Monitoring
-- See what every agent is doing
-- Intervene when needed
-- Review progress across all projects
-
-## 📋 Best Practices
-
-### Writing Effective Specifications
-
-```markdown
-PROJECT: E-commerce Checkout
-GOAL: Implement multi-step checkout process
-
-CONSTRAINTS:
-- Use existing cart state management
-- Follow current design system
-- Maximum 3 API endpoints
-- Commit after each step completion
-
-DELIVERABLES:
-1. Shipping address form with validation
-2. Payment method selection (Stripe integration)
-3. Order review and confirmation page
-4. Success/failure handling
-
-SUCCESS CRITERIA:
-- All forms validate properly
-- Payment processes without errors  
-- Order data persists to database
-- Emails send on completion
-```
-
-### Git Safety Rules
-
-1. **Before Starting Any Task**
-   ```bash
-   git checkout -b feature/[task-name]
-   git status  # Ensure clean state
-   ```
-
-2. **Every 30 Minutes**
-   ```bash
-   git add -A
-   git commit -m "Progress: [what was accomplished]"
-   ```
-
-3. **When Task Completes**
-   ```bash
-   git tag stable-[feature]-[date]
-   git checkout main
-   git merge feature/[task-name]
-   ```
-
-## 🚨 Common Pitfalls & Solutions
-
-| Pitfall | Consequence | Solution |
-|---------|-------------|----------|
-| Vague instructions | Agent drift, wasted compute | Write clear, specific specs |
-| No git commits | Lost work, frustrated devs | Enforce 30-minute commit rule |
-| Too many tasks | Context overload, confusion | One task per agent at a time |
-| No specifications | Unpredictable results | Always start with written spec |
-| Missing checkpoints | Agents stop working | Schedule regular check-ins |
-
-## 🛠️ How It Works
-
-### The Magic of Tmux
-Tmux (terminal multiplexer) is the key enabler because:
-- It persists terminal sessions even when disconnected
-- Allows multiple windows/panes in one session
-- Gemini runs in the terminal, so it can control other Gemini instances
-- Commands can be sent programmatically to any window
-
-### 💬 Simplified Agent Communication
-
-We now use the `send-gemini-message.sh` script for all agent communication:
-
-```bash
-# Send message to any Gemini agent
-./send-gemini-message.sh session:window "Your message here"
-
-# Examples:
-./send-gemini-message.sh frontend:0 "What's your progress on the login form?"
-./send-gemini-message.sh backend:1 "The API endpoint /api/users is returning 404"
-./send-gemini-message.sh project-manager:0 "Please coordinate with the QA team"
-```
-
-The script handles all timing complexities automatically, making agent communication reliable and consistent.
-
-### Scheduling Check-ins
-```bash
-# Schedule with specific, actionable notes
-./schedule_with_note.sh 30 "Review auth implementation, assign next task"
-./schedule_with_note.sh 60 "Check test coverage, merge if passing"
-./schedule_with_note.sh 120 "Full system check, rotate tasks if needed"
-```
-
-**Important**: The orchestrator needs to know which tmux window it's running in to schedule its own check-ins correctly. If scheduling isn't working, verify the orchestrator knows its current window with:
-```bash
-echo "Current window: $(tmux display-message -p "#{session_name}:#{window_index}")"
-```
-
-## 🎓 Advanced Usage
-
-### Multi-Project Orchestration
-```bash
-# Start orchestrator
-tmux new-session -s orchestrator
-
-# Create project managers for each project
-tmux new-window -n frontend-pm
-tmux new-window -n backend-pm  
-tmux new-window -n mobile-pm
-
-# Each PM manages their own engineers
-# Orchestrator coordinates between PMs
-```
-
-### Cross-Project Intelligence
-The orchestrator can share insights between projects:
-- "Frontend is using /api/v2/users, update backend accordingly"
-- "Authentication is working in Project A, use same pattern in Project B"
-- "Performance issue found in shared library, fix across all projects"
-
-## 📚 Core Files
-
-- `send-gemini-message.sh` - Simplified agent communication script
-- `schedule_with_note.sh` - Self-scheduling functionality
-- `tmux_utils.py` - Tmux interaction utilities
-- `GEMINI.md` - Agent behavior instructions
-- `LEARNINGS.md` - Accumulated knowledge base
-
-## 🤝 Contributing & Optimization
-
-The orchestrator evolves through community discoveries and optimizations. When contributing:
-
-1. Document new tmux commands and patterns in GEMINI.md
-2. Share novel use cases and agent coordination strategies
-3. Submit optimizations for geminis synchronization
-4. Keep command reference up-to-date with latest findings
-5. Test improvements across multiple sessions and scenarios
-
-Key areas for enhancement:
-- Agent communication patterns
-- Cross-project coordination
-- Novel automation workflows
-
-## 📄 License
-
-MIT License - Use freely but wisely. Remember: with great automation comes great responsibility.
+This structure allows for specialized agents, parallel workflows, and better focus for each AI model.
 
 ---
 
-*"The tools we build today will program themselves tomorrow"* - Alan Kay, 1971
+## ⚙️ Installation & Setup
+
+### Prerequisites
+
+1.  **Tmux**: Ensure `tmux` is installed on your system.
+    ```bash
+    # On macOS
+    brew install tmux
+
+    # On Debian/Ubuntu
+    sudo apt-get install tmux
+    ```
+2.  **Gemini CLI**: This tool relies on the Gemini CLI. Make sure it's installed and configured.
+
+### Workflow
+
+The core idea is to run Gemini agents inside `tmux` windows. This allows them to run persistently. You, as the orchestrator, can then send commands and instructions to these agents to guide their work.
+
+---
+
+## 🏁 Quick Start Guide
+
+### Step 1: Create a Tmux Session
+
+First, create a named `tmux` session for your project.
+
+```bash
+tmux new-session -s my-project
+```
+
+### Step 2: Start the Project Manager Agent
+
+Inside the tmux session, start your first Gemini agent. This will be your Project Manager. To allow the agent to execute commands without asking for confirmation each time, use the `--yolo` flag.
+
+```bash
+gemini --yolo
+```
+
+### Step 3: Brief the Project Manager
+
+Now, give the Project Manager its instructions. You can paste a multi-line prompt directly into the Gemini CLI.
+
+> You are a Project Manager. Your goal is to build a new feature for our web app.
+>
+> **Project Spec:**
+> - **Project:** Web App
+> - **Goal:** Add a user authentication system.
+> - **Constraints:** Use the existing database schema and follow current code patterns.
+>
+> **Instructions:**
+> 1.  Create a new tmux window (window 1) for an Engineer agent.
+> 2.  Start a new `gemini --yolo` instance in that window.
+> 3.  Brief the Engineer agent on the technical requirements.
+> 4.  Schedule a check-in with yourself in 30 minutes to review the Engineer's progress.
+
+### Step 4: Schedule Your Own Check-in
+
+To make the system fully autonomous, schedule a follow-up for yourself (the Orchestrator) to check on the Project Manager.
+
+```bash
+./schedule_with_note.sh 30 "Check PM progress on the auth system"
+```
+
+This script will notify you in 30 minutes, ensuring the project doesn't get stuck.
+
+---
+
+## 🛠️ Core Scripts & Commands
+
+### Agent Communication: `send-gemini-message.sh`
+
+To communicate between agents (or for you to command an agent), use the `send-gemini-message.sh` script. It handles the complexities of sending commands to the correct tmux window.
+
+```bash
+# Usage: ./send-gemini-message.sh <session:window> "Your message"
+
+# Example: Ask the engineer in window 1 for a status update
+./send-gemini-message.sh my-project:1 "What is your current progress on the login endpoint?"
+```
+
+### Self-Scheduling: `schedule_with_note.sh`
+
+Agents use this script to schedule their own follow-up tasks. This is the key to autonomous, 24/7 operation.
+
+```bash
+# Usage: ./schedule_with_note.sh <minutes> "Note for the future"
+
+# Example: The engineer schedules a self-reminder to commit its work
+./schedule_with_note.sh 30 "Progress: Implemented login endpoint. Now, commit changes and start on user sessions."
+```
+
+---
+
+## 🔒 Git Discipline: A Critical Protocol
+
+To prevent work loss, all agents MUST adhere to a strict Git workflow.
+
+1.  **Create Feature Branches**: Before starting any new task, create a descriptive feature branch.
+    ```bash
+    git checkout -b feature/user-auth-system
+    ```
+2.  **Commit Frequently**: Commit work at least every 30 minutes. This creates a safe checkpoint to revert to if the agent goes down a wrong path.
+    ```bash
+    git add -A
+    git commit -m "Progress: Finished user model and initial migration"
+    ```
+3.  **Tag Stable Versions**: When a significant feature is complete, tag it.
+    ```bash
+    git tag stable-auth-v1-$(date +%Y%m%d-%H%M%S)
+    ```
+
+---
+
+## 📸 Examples in Action
+
+
+
+
+
+---
+
+## 📄 License
+
+MIT License. Use freely, but with great power comes great responsibility.
