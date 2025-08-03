@@ -79,7 +79,7 @@ EOF
 tmux new-session -s my-project
 
 # 3. Start project manager in window 0
-gemini --yolo
+gemini 
 
 # 4. Give PM the spec and let it create an engineer
 "You are a Project Manager. Read project_spec.md and create an engineer 
@@ -94,7 +94,7 @@ in window 1 to implement it. Schedule check-ins every 30 minutes."
 ```bash
 # Start the orchestrator
 tmux new-session -s orchestrator
-gemini --yolo
+gemini
 
 # Give it your projects
 "You are the Orchestrator. Set up project managers for:

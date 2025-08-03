@@ -143,10 +143,10 @@ Follow this systematic sequence to start any project:
 #### 1. Find the Project
 ```bash
 # List all directories in ~/Coding to find projects
-ls -la ~/Coding/ | grep "^d" | awk '{print $NF}' | grep -v "^\."
+ls -la ~/Downloading/tmux-gemini-orchestrator/$PROJECT_NAME | grep "^d" | awk '{print $NF}' | grep -v "^\."
 
 # If project name is ambiguous, list matches
-ls -la ~/Coding/ | grep -i "task"  # for "task templates"
+ls -la ~/Downloading/tmux-gemini-orchestrator/$PROJECT_NAME | grep -i "task"  # for "task templates"
 ```
 
 #### 2. Create Tmux Session
@@ -172,7 +172,7 @@ tmux new-window -t $PROJECT_NAME -n "Dev-Server" -c "$PROJECT_PATH"
 #### 4. Brief the Gemini Agent
 ```bash
 # Send briefing message to Gemini agent
-tmux send-keys -t $PROJECT_NAME:0 "gemini --yolo" Enter
+tmux send-keys -t $PROJECT_NAME:0 "gemini" Enter
 sleep 5  # Wait for Gemini to start
 
 # Send the briefing
@@ -249,7 +249,7 @@ tmux capture-pane -t $PROJECT_NAME:2 -p | grep -i error
 ### Example: Starting "Task Templates" Project
 ```bash
 # 1. Find project
-ls -la ~/Coding/ | grep -i task
+ls -la ~/Downloading/tmux-gemini-orchestrator/$PROJECT_NAME | grep -i task
 # Found: task-templates
 
 # 2. Create session
@@ -379,10 +379,10 @@ Priority: HIGH/MED/LOW
 #### 1. Project Analysis
 ```bash
 # Find project
-ls -la ~/Coding/ | grep -i "[project-name]"
+ls -la ~/Downloading/tmux-gemini-orchestrator/$PROJECT_NAME | grep -i "[project-name]"
 
 # Analyze project type
-cd ~/Coding/[project-name]
+cd ~/Downloading/tmux-gemini-orchestrator/$PROJECT_NAME
 test -f package.json && echo "Node.js project"
 test -f requirements.txt && echo "Python project"
 ```
