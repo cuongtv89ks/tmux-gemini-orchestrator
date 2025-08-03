@@ -169,10 +169,10 @@ class TmuxOrchestrator:
         return matches
     
     def create_monitoring_snapshot(self) -> str:
-        """Create a comprehensive snapshot for Claude analysis"""
+        """Create a comprehensive snapshot for Gemini analysis"""
         status = self.get_all_windows_status()
         
-        # Format for Claude consumption
+        # Format for Gemini consumption
         snapshot = f"Tmux Monitoring Snapshot - {status['timestamp']}\n"
         snapshot += "=" * 50 + "\n\n"
         

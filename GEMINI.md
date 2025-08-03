@@ -1,7 +1,7 @@
-# Claude.md - Tmux Orchestrator Project Knowledge Base
+# Gemini.md - Tmux Orchestrator Project Knowledge Base
 
 ## Project Overview
-The Tmux Orchestrator is an AI-powered session management system where Claude acts as the orchestrator for multiple Claude agents across tmux sessions, managing codebases and keeping development moving forward 24/7.
+The Tmux Orchestrator is an AI-powered session management system where Gemini acts as the orchestrator for multiple Gemini agents across tmux sessions, managing codebases and keeping development moving forward 24/7.
 
 ## Agent System Architecture
 
@@ -105,14 +105,14 @@ Project Managers must enforce git discipline:
 ## Startup Behavior - Tmux Window Naming
 
 ### Auto-Rename Feature
-When Claude starts in the orchestrator, it should:
+When Gemini starts in the orchestrator, it should:
 1. **Ask the user**: "Would you like me to rename all tmux windows with descriptive names for better organization?"
 2. **If yes**: Analyze each window's content and rename them with meaningful names
 3. **If no**: Continue with existing names
 
 ### Window Naming Convention
 Windows should be named based on their actual function:
-- **Claude Agents**: `Claude-Frontend`, `Claude-Backend`, `Claude-Convex`
+- **Gemini Agents**: `Gemini-Frontend`, `Gemini-Backend`, `Gemini-Convex`
 - **Dev Servers**: `NextJS-Dev`, `Frontend-Dev`, `Uvicorn-API`
 - **Shells/Utilities**: `Backend-Shell`, `Frontend-Shell`
 - **Services**: `Convex-Server`, `Orchestrator`
@@ -124,7 +124,7 @@ Windows should be named based on their actual function:
 tmux rename-window -t session:window-index "New-Name"
 
 # Example:
-tmux rename-window -t ai-chat:0 "Claude-Convex"
+tmux rename-window -t ai-chat:0 "Gemini-Convex"
 tmux rename-window -t glacier-backend:3 "Uvicorn-API"
 ```
 
@@ -153,14 +153,14 @@ ls -la ~/Coding/ | grep -i "task"  # for "task templates"
 ```bash
 # Create session with project name (use hyphens for spaces)
 PROJECT_NAME="task-templates"  # or whatever the folder is called
-PROJECT_PATH="/Users/jasonedward/Coding/$PROJECT_NAME"
+PROJECT_PATH="/Users/cuongtv20/Downloads/tmux-gemini-orchestrator/$PROJECT_NAME"
 tmux new-session -d -s $PROJECT_NAME -c "$PROJECT_PATH"
 ```
 
 #### 3. Set Up Standard Windows
 ```bash
-# Window 0: Claude Agent
-tmux rename-window -t $PROJECT_NAME:0 "Claude-Agent"
+# Window 0: Gemini Agent
+tmux rename-window -t $PROJECT_NAME:0 "Gemini-Agent"
 
 # Window 1: Shell
 tmux new-window -t $PROJECT_NAME -n "Shell" -c "$PROJECT_PATH"
@@ -169,11 +169,11 @@ tmux new-window -t $PROJECT_NAME -n "Shell" -c "$PROJECT_PATH"
 tmux new-window -t $PROJECT_NAME -n "Dev-Server" -c "$PROJECT_PATH"
 ```
 
-#### 4. Brief the Claude Agent
+#### 4. Brief the Gemini Agent
 ```bash
-# Send briefing message to Claude agent
-tmux send-keys -t $PROJECT_NAME:0 "claude" Enter
-sleep 5  # Wait for Claude to start
+# Send briefing message to Gemini agent
+tmux send-keys -t $PROJECT_NAME:0 "gemini --yolo" Enter
+sleep 5  # Wait for Gemini to start
 
 # Send the briefing
 tmux send-keys -t $PROJECT_NAME:0 "You are responsible for the $PROJECT_NAME codebase. Your duties include:
@@ -253,15 +253,15 @@ ls -la ~/Coding/ | grep -i task
 # Found: task-templates
 
 # 2. Create session
-tmux new-session -d -s task-templates -c "/Users/jasonedward/Coding/task-templates"
+tmux new-session -d -s task-templates -c "/Users/cuongtv20/Downloads/tmux-gemini-orchestrator/task-templates"
 
 # 3. Set up windows
-tmux rename-window -t task-templates:0 "Claude-Agent"
-tmux new-window -t task-templates -n "Shell" -c "/Users/jasonedward/Coding/task-templates"
-tmux new-window -t task-templates -n "Dev-Server" -c "/Users/jasonedward/Coding/task-templates"
+tmux rename-window -t task-templates:0 "Gemini-Agent"
+tmux new-window -t task-templates -n "Shell" -c "/Users/cuongtv20/Downloads/tmux-gemini-orchestrator/task-templates"
+tmux new-window -t task-templates -n "Dev-Server" -c "/Users/cuongtv20/Downloads/tmux-gemini-orchestrator/task-templates"
 
-# 4. Start Claude and brief
-tmux send-keys -t task-templates:0 "claude" Enter
+# 4. Start Gemini and brief
+tmux send-keys -t task-templates:0 "gemini" Enter
 # ... (briefing as above)
 ```
 
@@ -295,8 +295,8 @@ tmux new-window -t [session] -n "Project-Manager" -c "$PROJECT_PATH"
 
 #### 3. Start and Brief the PM
 ```bash
-# Start Claude
-tmux send-keys -t [session]:[PM-window] "claude" Enter
+# Start Gemini
+tmux send-keys -t [session]:[PM-window] "gemini" Enter
 sleep 5
 
 # Send PM-specific briefing
@@ -409,7 +409,7 @@ tmux new-window -t [session] -n "TEMP-CodeReview"
 ```bash
 # 1. Capture complete conversation
 tmux capture-pane -t [session]:[window] -S - -E - > \
-  ~/Coding/Tmux\ orchestrator/registry/logs/[session]_[role]_$(date +%Y%m%d_%H%M%S).log
+  /Users/cuongtv20/Downloads/tmux-gemini-orchestrator/registry/logs/[session]_[role]_$(date +%Y%m%d_%H%M%S).log
 
 # 2. Create summary of work completed
 echo "=== Agent Summary ===" >> [logfile]
@@ -423,7 +423,7 @@ tmux kill-window -t [session]:[window]
 
 ### Agent Logging Structure
 ```
-~/Coding/Tmux orchestrator/registry/
+/Users/cuongtv20/Downloads/tmux-gemini-orchestrator/registry/
 ├── logs/            # Agent conversation logs
 ├── sessions.json    # Active session tracking
 └── notes/           # Orchestrator notes and summaries
@@ -530,7 +530,7 @@ tmux send-keys -t session:window-name "cd /correct/path" Enter
 
 **Root Cause**: Not using `tmux capture-pane` to verify command results
 
-**Solution**:
+**Solution**: 
 ```bash
 # Always check output after running commands
 tmux send-keys -t session:window "command" Enter
@@ -539,23 +539,23 @@ tmux capture-pane -t session:window -p | tail -50
 ```
 
 #### Mistake 3: Typing Commands in Already Active Sessions
-**What Went Wrong**: Typed "claude" in a window that already had Claude running
+**What Went Wrong**: Typed "gemini" in a window that already had Gemini running
 
 **Root Cause**: Not checking window contents before sending commands
 
-**Solution**:
+**Solution**: 
 ```bash
 # Check window contents first
 tmux capture-pane -t session:window -S -100 -p
 # Look for prompts or active sessions before sending commands
 ```
 
-#### Mistake 4: Incorrect Message Sending to Claude Agents
+#### Mistake 4: Incorrect Message Sending to Gemini Agents
 **What Went Wrong**: Initially sent Enter key with the message text instead of as separate command
 
 **Root Cause**: Using `tmux send-keys -t session:window "message" Enter` combines them
 
-**Solution**:
+**Solution**: 
 ```bash
 # Send message and Enter separately
 tmux send-keys -t session:window "Your message here"
@@ -613,29 +613,29 @@ When a command fails:
    - Permission issues
    - Port already in use
 
-### Communication with Claude Agents
+### Communication with Gemini Agents
 
-#### 🎯 IMPORTANT: Always Use send-claude-message.sh Script
+#### 🎯 IMPORTANT: Always Use send-gemini-message.sh Script
 
 **DO NOT manually send messages with tmux send-keys anymore!** We have a dedicated script that handles all the timing and complexity for you.
 
-#### Using send-claude-message.sh
+#### Using send-gemini-message.sh
 ```bash
 # Basic usage - ALWAYS use this instead of manual tmux commands
-/Users/jasonedward/Coding/Tmux\ orchestrator/send-claude-message.sh <target> "message"
+/Users/cuongtv20/Downloads/tmux-gemini-orchestrator/send-gemini-message.sh <target> "message"
 
 # Examples:
 # Send to a window
-/Users/jasonedward/Coding/Tmux\ orchestrator/send-claude-message.sh agentic-seek:3 "Hello Claude!"
+/Users/cuongtv20/Downloads/tmux-gemini-orchestrator/send-gemini-message.sh agentic-seek:3 "Hello Gemini!"
 
 # Send to a specific pane in split-screen
-/Users/jasonedward/Coding/Tmux\ orchestrator/send-claude-message.sh tmux-orc:0.1 "Message to pane 1"
+/Users/cuongtv20/Downloads/tmux-gemini-orchestrator/send-gemini-message.sh tmux-orc:0.1 "Message to pane 1"
 
 # Send complex instructions
-/Users/jasonedward/Coding/Tmux\ orchestrator/send-claude-message.sh glacier-backend:0 "Please check the database schema for the campaigns table and verify all columns are present"
+/Users/cuongtv20/Downloads/tmux-gemini-orchestrator/send-gemini-message.sh glacier-backend:0 "Please check the database schema for the campaigns table and verify all columns are present"
 
 # Send status update requests
-/Users/jasonedward/Coding/Tmux\ orchestrator/send-claude-message.sh ai-chat:2 "STATUS UPDATE: What's your current progress on the authentication implementation?"
+/Users/cuongtv20/Downloads/tmux-gemini-orchestrator/send-gemini-message.sh ai-chat:2 "STATUS UPDATE: What's your current progress on the authentication implementation?"
 ```
 
 #### Why Use the Script?
@@ -646,7 +646,7 @@ When a command fails:
 5. **Consistent messaging**: All agents receive messages the same way
 
 #### Script Location and Usage
-- **Location**: `/Users/jasonedward/Coding/Tmux orchestrator/send-claude-message.sh`
+- **Location**: `/Users/cuongtv20/Downloads/tmux-gemini-orchestrator/send-gemini-message.sh`
 - **Permissions**: Already executable, ready to use
 - **Arguments**: 
   - First: target (session:window or session:window.pane)
@@ -654,41 +654,41 @@ When a command fails:
 
 #### Common Messaging Patterns with the Script
 
-##### 1. Starting Claude and Initial Briefing
+##### 1. Starting Gemini and Initial Briefing
 ```bash
-# Start Claude first
-tmux send-keys -t project:0 "claude" Enter
+# Start Gemini first
+tmux send-keys -t project:0 "gemini" Enter
 sleep 5
 
 # Then use the script for the briefing
-/Users/jasonedward/Coding/Tmux\ orchestrator/send-claude-message.sh project:0 "You are responsible for the frontend codebase. Please start by analyzing the current project structure and identifying any immediate issues."
+/Users/cuongtv20/Downloads/tmux-gemini-orchestrator/send-gemini-message.sh project:0 "You are responsible for the frontend codebase. Please start by analyzing the current project structure and identifying any immediate issues."
 ```
 
 ##### 2. Cross-Agent Coordination
 ```bash
 # Ask frontend agent about API usage
-/Users/jasonedward/Coding/Tmux\ orchestrator/send-claude-message.sh frontend:0 "Which API endpoints are you currently using from the backend?"
+/Users/cuongtv20/Downloads/tmux-gemini-orchestrator/send-gemini-message.sh frontend:0 "Which API endpoints are you currently using from the backend?"
 
 # Share info with backend agent
-/Users/jasonedward/Coding/Tmux\ orchestrator/send-claude-message.sh backend:0 "Frontend is using /api/v1/campaigns and /api/v1/flows endpoints"
+/Users/cuongtv20/Downloads/tmux-gemini-orchestrator/send-gemini-message.sh backend:0 "Frontend is using /api/v1/campaigns and /api/v1/flows endpoints"
 ```
 
 ##### 3. Status Checks
 ```bash
 # Quick status request
-/Users/jasonedward/Coding/Tmux\ orchestrator/send-claude-message.sh session:0 "Quick status update please"
+/Users/cuongtv20/Downloads/tmux-gemini-orchestrator/send-gemini-message.sh session:0 "Quick status update please"
 
 # Detailed status request
-/Users/jasonedward/Coding/Tmux\ orchestrator/send-claude-message.sh session:0 "STATUS UPDATE: Please provide: 1) Completed tasks, 2) Current work, 3) Any blockers"
+/Users/cuongtv20/Downloads/tmux-gemini-orchestrator/send-gemini-message.sh session:0 "STATUS UPDATE: Please provide: 1) Completed tasks, 2) Current work, 3) Any blockers"
 ```
 
 ##### 4. Providing Assistance
 ```bash
 # Share error information
-/Users/jasonedward/Coding/Tmux\ orchestrator/send-claude-message.sh session:0 "I see in your server window that port 3000 is already in use. Try port 3001 instead."
+/Users/cuongtv20/Downloads/tmux-gemini-orchestrator/send-gemini-message.sh session:0 "I see in your server window that port 3000 is already in use. Try port 3001 instead."
 
 # Guide stuck agents
-/Users/jasonedward/Coding/Tmux\ orchestrator/send-claude-message.sh session:0 "The error you're seeing is because the virtual environment isn't activated. Run 'source venv/bin/activate' first."
+/Users/cuongtv20/Downloads/tmux-gemini-orchestrator/send-gemini-message.sh session:0 "The error you're seeing is because the virtual environment isn't activated. Run 'source venv/bin/activate' first."
 ```
 
 #### OLD METHOD (DO NOT USE)
@@ -699,14 +699,14 @@ sleep 1
 tmux send-keys -t session:window Enter
 
 # ✅ DO THIS INSTEAD:
-/Users/jasonedward/Coding/Tmux\ orchestrator/send-claude-message.sh session:window "message"
+/Users/cuongtv20/Downloads/tmux-gemini-orchestrator/send-gemini-message.sh session:window "message"
 ```
 
 #### Checking for Responses
 After sending a message, check for the response:
 ```bash
 # Send message
-/Users/jasonedward/Coding/Tmux\ orchestrator/send-claude-message.sh session:0 "What's your status?"
+/Users/cuongtv20/Downloads/tmux-gemini-orchestrator/send-gemini-message.sh session:0 "What's your status?"
 
 # Wait a bit for response
 sleep 5

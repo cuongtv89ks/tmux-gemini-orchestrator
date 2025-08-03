@@ -1,6 +1,6 @@
 ![Orchestrator Hero](/Orchestrator.png)
 
-**Run AI agents 24/7 while you sleep** - The Tmux Orchestrator enables Claude agents to work autonomously, schedule their own check-ins, and coordinate across multiple projects without human intervention.
+**Run AI agents 24/7 while you sleep** - The Tmux Orchestrator enables Gemini agents to work autonomously, schedule their own check-ins, and coordinate across multiple projects without human intervention.
 
 ## 🤖 Key Capabilities & Autonomous Features
 
@@ -79,7 +79,7 @@ EOF
 tmux new-session -s my-project
 
 # 3. Start project manager in window 0
-claude
+gemini --yolo
 
 # 4. Give PM the spec and let it create an engineer
 "You are a Project Manager. Read project_spec.md and create an engineer 
@@ -94,7 +94,7 @@ in window 1 to implement it. Schedule check-ins every 30 minutes."
 ```bash
 # Start the orchestrator
 tmux new-session -s orchestrator
-claude
+gemini --yolo
 
 # Give it your projects
 "You are the Orchestrator. Set up project managers for:
@@ -190,21 +190,21 @@ SUCCESS CRITERIA:
 Tmux (terminal multiplexer) is the key enabler because:
 - It persists terminal sessions even when disconnected
 - Allows multiple windows/panes in one session
-- Claude runs in the terminal, so it can control other Claude instances
+- Gemini runs in the terminal, so it can control other Gemini instances
 - Commands can be sent programmatically to any window
 
 ### 💬 Simplified Agent Communication
 
-We now use the `send-claude-message.sh` script for all agent communication:
+We now use the `send-gemini-message.sh` script for all agent communication:
 
 ```bash
-# Send message to any Claude agent
-./send-claude-message.sh session:window "Your message here"
+# Send message to any Gemini agent
+./send-gemini-message.sh session:window "Your message here"
 
 # Examples:
-./send-claude-message.sh frontend:0 "What's your progress on the login form?"
-./send-claude-message.sh backend:1 "The API endpoint /api/users is returning 404"
-./send-claude-message.sh project-manager:0 "Please coordinate with the QA team"
+./send-gemini-message.sh frontend:0 "What's your progress on the login form?"
+./send-gemini-message.sh backend:1 "The API endpoint /api/users is returning 404"
+./send-gemini-message.sh project-manager:0 "Please coordinate with the QA team"
 ```
 
 The script handles all timing complexities automatically, making agent communication reliable and consistent.
@@ -246,19 +246,19 @@ The orchestrator can share insights between projects:
 
 ## 📚 Core Files
 
-- `send-claude-message.sh` - Simplified agent communication script
+- `send-gemini-message.sh` - Simplified agent communication script
 - `schedule_with_note.sh` - Self-scheduling functionality
 - `tmux_utils.py` - Tmux interaction utilities
-- `CLAUDE.md` - Agent behavior instructions
+- `GEMINI.md` - Agent behavior instructions
 - `LEARNINGS.md` - Accumulated knowledge base
 
 ## 🤝 Contributing & Optimization
 
 The orchestrator evolves through community discoveries and optimizations. When contributing:
 
-1. Document new tmux commands and patterns in CLAUDE.md
+1. Document new tmux commands and patterns in GEMINI.md
 2. Share novel use cases and agent coordination strategies
-3. Submit optimizations for claudes synchronization
+3. Submit optimizations for geminis synchronization
 4. Keep command reference up-to-date with latest findings
 5. Test improvements across multiple sessions and scenarios
 

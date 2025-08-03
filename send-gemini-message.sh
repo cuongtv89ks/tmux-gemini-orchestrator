@@ -1,11 +1,11 @@
 #!/bin/bash
 
-# Send message to Claude agent in tmux window
-# Usage: send-claude-message.sh <session:window> <message>
+# Send message to Gemini agent in tmux window
+# Usage: send-gemini-message.sh <session:window> <message>
 
 if [ $# -lt 2 ]; then
     echo "Usage: $0 <session:window> <message>"
-    echo "Example: $0 agentic-seek:3 'Hello Claude!'"
+    echo "Example: $0 agentic-seek:3 'Hello Gemini!'"
     exit 1
 fi
 
@@ -16,8 +16,8 @@ MESSAGE="$*"
 # Send the message
 tmux send-keys -t "$WINDOW" "$MESSAGE"
 
-# Wait 0.5 seconds for UI to register
-sleep 0.5
+# Wait 5 seconds for UI to register
+sleep 5
 
 # Send Enter to submit
 tmux send-keys -t "$WINDOW" Enter

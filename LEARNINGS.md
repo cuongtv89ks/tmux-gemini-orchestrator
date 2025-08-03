@@ -6,7 +6,7 @@
 - **Issue**: Developer spent 2+ hours trying to solve JWT multiline environment variable issue in Convex
 - **Mistake**: As PM, I didn't suggest web research until prompted by the user
 - **Learning**: Should ALWAYS suggest web research after 10 minutes of failed attempts
-- **Solution**: Added "Web Research is Your Friend" section to global CLAUDE.md
+- **Solution**: Added "Web Research is Your Friend" section to global GEMINI.md
 - **Impact**: Web search immediately revealed the solution (replace newlines with spaces)
 
 ### Insight: Reading Error Messages Carefully
