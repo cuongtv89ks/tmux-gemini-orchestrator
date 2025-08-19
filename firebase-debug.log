@@ -12,3 +12,5 @@
 [debug] [2025-08-03T11:03:53.743Z] > authorizing via signed-in user (cuongtv20fpt@gmail.com)
 [debug] [2025-08-03T12:15:02.698Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
 [debug] [2025-08-03T12:15:02.699Z] > authorizing via signed-in user (cuongtv20fpt@gmail.com)
+[debug] [2025-08-03T13:42:59.661Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2025-08-03T13:42:59.664Z] > authorizing via signed-in user (cuongtv20fpt@gmail.com)
